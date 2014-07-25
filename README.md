@@ -3,12 +3,12 @@ extensive knowldege of the API and all of the specific URLs.  This
 module attemps to avoid that.
 
 REQUIRES:
-LWP::UserAgent
-JSON
-URI::Escape
+* LWP::UserAgent
+* JSON
+* URI::Escape
 
 TODO:
-Almost everything.
+* Almost everything.
 
 ```perl
 
