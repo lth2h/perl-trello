@@ -91,6 +91,26 @@ sub get_members_boards {
 
 }
 
+sub get_members_boards_by_name {
+
+  my $self = ref($_[0]) ? shift : "";
+  my $member = shift;
+
+  my %rv;
+
+  my $member_info = get_member_info($member);
+
+  foreach my $board (@{$member_info->{"idBoards"}}) {
+
+    my $board_info = get_board_info($board);
+    $rv{$board_info->{"name"}} = \%{$board_info};
+
+  }
+
+  return %rv;
+  
+}
+
 sub get_board_info {
 
   my $self = ref($_[0]) ? shift : "";
@@ -139,9 +159,11 @@ sub get_board_lists_by_name {
 
   }
 
-  return %lists;  
+  return %lists;
 
 }
+
+# things that actually write should probably be in a different module.
 
 sub create_card {
 
@@ -164,7 +186,17 @@ sub create_card {
 
   my $response = $ua->post($url);
 
-  return $response;
+  my $json = $response->decoded_content;
+
+  my $items = decode_json($json);
+
+  # print Dumper $items;
+
+  my $id = $items->{'id'};
+
+  # probably should die if $id is null
+
+  return $id;
 
 }
 
