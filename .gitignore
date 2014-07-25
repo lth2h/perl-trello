@@ -1,0 +1,8 @@
+# Editor files:
+*~
+.*sw?
+.\#*
+\#*\#
+
+# conf files
+*.conf
